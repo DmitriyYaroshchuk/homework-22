@@ -90,17 +90,18 @@ mainBlock.addEventListener('click', (event) => {
     }
 
     if (event.target.id === 'edit') {
+        sendButton.style.display = 'inline';
+        editButton.style.display = 'none';
+        const text = document.getElementById('text');
+        text.removeAttribute('id');
+
+
         if (input.value === '' ) {
-            sendButton.style.display = 'inline';
-            editButton.style.display = 'none';
             return false
         } else {
-            const text = document.getElementById('text');
             text.textContent = input.value;
             text.removeAttribute('id');
             input.value = '';
-            sendButton.style.display = 'inline';
-            editButton.style.display = 'none';
         }
     }
 });
