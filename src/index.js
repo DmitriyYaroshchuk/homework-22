@@ -55,9 +55,16 @@ socket.on('receiveMessage', response => {
     const settingsButton = document.createElement('button');
     settingsButton.classList.add('settings-button');
 
-    const image = document.createElement('img');
-    image.src = 'settings.svg'
-    image.classList.add('svg-settings');
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+
+    const imageEdit = document.createElement('img');
+    imageEdit.src = 'settings.svg'
+    imageEdit.classList.add('svg-settings');
+
+    const imageDelete = document.createElement('img');
+    imageDelete.src = 'delete.svg'
+    imageDelete.classList.add('svg-delete');
 
 
     chatContainer.appendChild(message);
@@ -67,9 +74,12 @@ socket.on('receiveMessage', response => {
     message.appendChild(messageContainer);
 
     messageContainer.appendChild(textParagraph);
-    messageContainer.appendChild(settingsButton);
 
-    settingsButton.appendChild(image);
+    messageContainer.appendChild(settingsButton);
+    messageContainer.appendChild(deleteButton);
+
+    settingsButton.appendChild(imageEdit);
+    deleteButton.appendChild(imageDelete);
 
     const chatMessageContainer = document.getElementsByClassName('chat')[0];
     chatMessageContainer.appendChild(chatContainer);
@@ -81,7 +91,11 @@ mainBlock.addEventListener('click', (event) => {
     const sendButton = document.getElementById('send');
     const editButton = document.getElementById('edit');
 
-    if (event.target.tagName === 'IMG') {
+    if (event.target.closest('.svg-delete')) {
+        event.target.closest('.left').style.display = 'none'
+    }
+
+    if (event.target.closest('.svg-settings')) {
         sendButton.style.display = 'none';
         editButton.style.display = 'inline';
         const message = event.target.parentElement.parentElement.children[0];
